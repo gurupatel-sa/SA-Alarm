@@ -1,13 +1,14 @@
 package com.sa.alarm.login
 
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.facebook.AccessToken
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.iid.FirebaseInstanceId
+import com.sa.alarm.common.Constants
 import com.sa.alarm.utils.LogUtils
 
 class LoginViewModel : ViewModel() {
@@ -17,6 +18,7 @@ class LoginViewModel : ViewModel() {
     private var isLoginSuccess: MutableLiveData<Boolean> = MutableLiveData()
     private var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     private var faliureMessage: MutableLiveData<String> = MutableLiveData()
+    private var rootRef : FirebaseFirestore = FirebaseFirestore.getInstance();
 
     fun loginEmailAuth(email: String, password: String) {
         isLoading.value = true
@@ -24,14 +26,29 @@ class LoginViewModel : ViewModel() {
             if (task.isSuccessful) {
                 task.result?.user?.let {
                     LogUtils.d(TAG, " " + task.result?.user?.uid)
-                    isLoginSuccess.value = true
+                    updateToken(it.uid)
                 }
             } else {
                 faliureMessage.value = task.exception?.message
                 isLoginSuccess.value = false
+                isLoading.value = false
             }
-            isLoading.value = false
         }
+    }
+
+    fun updateToken(uid:String){
+        rootRef.collection(Constants.USER_LIST)
+            .document(uid)
+            .update("token",FirebaseInstanceId.getInstance().token.toString())
+            .addOnCompleteListener { task ->
+                if(task.isSuccessful){
+                    isLoginSuccess.value = true
+                }
+                else{
+                    faliureMessage.value = task.exception?.message
+                }
+                isLoading.value = false
+            }
     }
 
     fun loginFbAuth(token: AccessToken) {

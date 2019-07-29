@@ -26,6 +26,7 @@ class HomeActivity : BaseActivity() {
 
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(this , AuthActivity::class.java))
+            finish()
         }
     }
 

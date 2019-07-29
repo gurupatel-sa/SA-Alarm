@@ -10,5 +10,8 @@ class Constants {
         var SUCCESS ="Success"
         var FAILED ="Failed"
 
+        //FIRESTORE FIELDS
+        val USER_LIST="user_list"
+
     }
 }

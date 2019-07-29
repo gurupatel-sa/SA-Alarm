@@ -2,7 +2,6 @@ package com.sa.alarm.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,11 +38,11 @@ class LoginFragment : BaseFragment() {
     private val TAG : String = this.javaClass.getSimpleName()
     private val PERMISSION_LIST = listOf("email", "public_profile")
 
-    lateinit var loginViewModel: LoginViewModel
-    lateinit var callbackManager: CallbackManager
+    private lateinit var loginViewModel: LoginViewModel
+    private lateinit var callbackManager: CallbackManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        LogUtils.d("LognFragment","oncreatvew")
+        LogUtils.d(TAG,"onCreateView")
         return inflater.inflate(R.layout.fragment_login , container ,false)
     }
 

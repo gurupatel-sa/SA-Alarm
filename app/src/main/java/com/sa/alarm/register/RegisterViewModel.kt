@@ -1,24 +1,24 @@
 package com.sa.alarm.register
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.facebook.AccessToken
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.iid.FirebaseInstanceId
+import com.sa.alarm.common.Constants
 import com.sa.alarm.register.model.User
 import com.sa.alarm.utils.LogUtils
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import java.util.*
 
 class RegisterViewModel : ViewModel() {
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    private var user: MutableLiveData<User> = MutableLiveData()
     private var isRegistrationSuccess: MutableLiveData<Boolean> = MutableLiveData()
     private var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     private var faliureMessage: MutableLiveData<String> = MutableLiveData()
+    private var rootRef : FirebaseFirestore =FirebaseFirestore.getInstance();
 
     var TAG = "RegisterViewmodel"
 
@@ -26,28 +26,46 @@ class RegisterViewModel : ViewModel() {
         isLoading.value = true
         firebaseAuth.createUserWithEmailAndPassword(mail, password)
             .addOnCompleteListener { task ->
-                LogUtils.d(TAG, "cOMPLETElISTNER")
+                LogUtils.d(TAG, "createUserWithEmailAndPassword")
                 if (task.isSuccessful) {
                     task.result?.user?.let {
-                        user.value = User(it.uid, it.email.toString(), null, name)
-                        isRegistrationSuccess.value = true
+                        val user= User(
+                            uid = it.uid ,
+                            email = it.email.toString() ,
+                            photoUrl = null ,
+                            token = FirebaseInstanceId.getInstance().token.toString() ,
+                            displayName = name ,
+                            timestamp =  Calendar.getInstance().time
+                        )
+                        addUserInDb(user)
                     }
                 }
                 else {
                     LogUtils.d(TAG, "onFaliure " +  task.exception?.message)
                     faliureMessage.value = task.exception?.message
-                    try {
-                        throw task.exception!!
-                    } catch (e: FirebaseAuthWeakPasswordException) {
-                    } catch (e: FirebaseAuthInvalidCredentialsException) {
-                    } catch (e: FirebaseAuthUserCollisionException) {
-                    } catch (e: Exception) {
-                        Log.e(TAG, e.message)
-                    }
+//                    try {
+//                        throw task.exception!!
+//                    } catch (e: FirebaseAuthWeakPasswordException) {
+//                    } catch (e: FirebaseAuthInvalidCredentialsException) {
+//                    } catch (e: FirebaseAuthUserCollisionException) {
+//                    } catch (e: Exception) {
+//                    }
                     isRegistrationSuccess.value = false
+                    isLoading.value = false
                 }
-                isLoading.value = false
             }
+    }
+
+     fun addUserInDb(user: User) {
+         rootRef.collection(Constants.USER_LIST)
+             .document(user.uid)
+             .set(user)
+             .addOnCompleteListener { task ->
+                 if(task.isSuccessful){
+                     isRegistrationSuccess.value = true
+                 }
+                 isLoading.value = false
+             }
     }
 
     fun registerFbUser(token: AccessToken) {
@@ -56,19 +74,26 @@ class RegisterViewModel : ViewModel() {
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener() { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "signInWithCredential:success")
+                    LogUtils.d(TAG,"registerFbAuth : signIn success")
                     task.result?.user?.let {
-                        user.value =
-                            User(it.uid, it.email.toString(), it.photoUrl.toString(), it.displayName.toString())
-                        isRegistrationSuccess.value = true
+                        val user= User(
+                            uid = it.uid ,
+                            email = it.email.toString() ,
+                            photoUrl = it.photoUrl.toString() ,
+                            token = FirebaseInstanceId.getInstance().token.toString() ,
+                            displayName = it.displayName.toString() ,
+                            timestamp =  Calendar.getInstance().time
+
+                        )
+                        addUserInDb(user)
                     }
 
                 } else {
+                    LogUtils.d(TAG,"registerFbAuth :signIn faliure ${task.exception}")
                     faliureMessage.value = task.exception?.message
                     isRegistrationSuccess.value = false
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    isLoading.value = false
                 }
-                isLoading.value = false
             }
     }
 
@@ -76,9 +101,6 @@ class RegisterViewModel : ViewModel() {
         return isRegistrationSuccess
     }
 
-    fun getUser(): LiveData<User> {
-        return user
-    }
 
     fun getProgresBar(): LiveData<Boolean> {
         return isLoading

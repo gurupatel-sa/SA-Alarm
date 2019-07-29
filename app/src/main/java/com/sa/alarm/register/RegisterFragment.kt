@@ -40,12 +40,12 @@ class RegisterFragment : BaseFragment() {
     private val TAG : String = this.javaClass.getSimpleName()
     private val PERMISSION_LIST = Arrays.asList("email", "public_profile")
 
-    lateinit var firebaseAuth: FirebaseAuth
-    lateinit var registerViewModel: RegisterViewModel
-    lateinit var callbackManager: CallbackManager
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var registerViewModel: RegisterViewModel
+    private lateinit var callbackManager: CallbackManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        LogUtils.d("LognFragment", "onCreateView")
+        LogUtils.d(TAG, "onCreateView")
         return inflater.inflate(R.layout.fragment_register, container, false)
     }
 
