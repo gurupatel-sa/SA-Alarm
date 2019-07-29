@@ -19,8 +19,5 @@ class LogUtils {
                 Log.e(tag, message)
             }
         }
-
-
     }
-
 }

@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-//apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.gms.google-services'
 
 android {
@@ -50,8 +49,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:18.1.0'
     implementation 'com.facebook.android:facebook-login:[5,6)'
 
-//    implementation 'com.google.firebase:firebase-firestore:20.2.0'
-//    implementation 'com.google.firebase:firebase-core:17.0.1'
 //    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
 
 }

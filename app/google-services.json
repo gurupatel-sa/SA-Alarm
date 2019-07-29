@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "803909667134",
+    "firebase_url": "https://sa-alarm.firebaseio.com",
+    "project_id": "sa-alarm",
+    "storage_bucket": "sa-alarm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803909667134:android:04d17c0c5ecf197f",
+        "android_client_info": {
+          "package_name": "com.sa.alarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803909667134-qpqiur83mh82jeu78vagn6mtko6qgcfd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDibMjyTX7bWqLQsUWNW532UaMplv_Iix4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803909667134-qpqiur83mh82jeu78vagn6mtko6qgcfd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
