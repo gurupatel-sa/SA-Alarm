@@ -55,7 +55,7 @@ class RegisterFragment : BaseFragment() {
 
         btnRegister.setOnClickListener {
             if (NetworkUtils.isOnline) {
-                registerViewModel.registerEmailUser("ab@gmail.com", "12345679", "Hey")
+                registerViewModel.registerEmailUser(etEmail.text.toString(), "12345679", etPassword.text.toString())
             }
         }
         btnFbRegister.setOnClickListener {
