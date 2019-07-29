@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SAAlarm</string>
+    <string name="facebook_app_id">539230336614526</string>
+    <string name="fb_login_protocol_scheme">fb539230336614526</string>
+    <string name="register">register</string>
+    <string name="login">login</string>
 </resources>

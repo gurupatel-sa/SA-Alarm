@@ -3,7 +3,9 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.sa.alarm">
 
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
             android:name=".base.BaseApplication"
@@ -14,15 +16,20 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".splash.DummyActivity">
+        <activity android:name=".home.HomeActivity">
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-    </application>
+        <activity android:name=".auth.AuthActivity">
+        </activity>
 
+        <meta-data
+                android:name="com.facebook.sdk.ApplicationId"
+                android:value="@string/facebook_app_id"/>
+    </application>
 </manifest>
