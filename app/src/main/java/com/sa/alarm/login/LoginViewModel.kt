@@ -11,10 +11,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.sa.alarm.utils.LogUtils
 
 class LoginViewModel : ViewModel() {
+    private val TAG : String = this.javaClass.getSimpleName()
+
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private var isLoginSuccess: MutableLiveData<Boolean> = MutableLiveData()
     private var isLoading: MutableLiveData<Boolean> = MutableLiveData()
-    private val TAG: String = "LoginViewModel"
     private var faliureMessage: MutableLiveData<String> = MutableLiveData()
 
     fun loginEmailAuth(email: String, password: String) {
@@ -40,11 +41,11 @@ class LoginViewModel : ViewModel() {
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener() { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "signInWithCredential:success")
+                    LogUtils.d(TAG,"loginFbAuth : signIn success")
                     isLoginSuccess.value = true
 
                 } else {
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    LogUtils.d(TAG,"loginFbAuth :signIn faliure ${task.exception}")
                     isLoginSuccess.value = false
                     faliureMessage.value = task.exception?.message
                 }

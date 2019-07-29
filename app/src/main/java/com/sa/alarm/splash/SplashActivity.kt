@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.sa.alarm.MainActivity
 import com.sa.alarm.R
 import com.sa.alarm.auth.AuthActivity
 import com.sa.alarm.common.Constants
@@ -12,10 +11,11 @@ import com.sa.alarm.home.HomeActivity
 import com.sa.alarm.utils.SharedPrefUtils
 
 class SplashActivity : AppCompatActivity() {
+    private val TAG : String = this.javaClass.getSimpleName()
     private val DELAY : Long=3000
 
+    private lateinit var runnable : Runnable
     private var handler: Handler? =null
-    private var runnable : Runnable ? =null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)

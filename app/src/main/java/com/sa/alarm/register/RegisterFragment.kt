@@ -2,7 +2,6 @@ package com.sa.alarm.register
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,14 +37,15 @@ class RegisterFragment : BaseFragment() {
         }
     }
 
+    private val TAG : String = this.javaClass.getSimpleName()
     private val PERMISSION_LIST = Arrays.asList("email", "public_profile")
-    private val TAG = "RegisterFragmetn"
+
     lateinit var firebaseAuth: FirebaseAuth
     lateinit var registerViewModel: RegisterViewModel
     lateinit var callbackManager: CallbackManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        LogUtils.d("LognFragment", "oncreatview")
+        LogUtils.d("LognFragment", "onCreateView")
         return inflater.inflate(R.layout.fragment_register, container, false)
     }
 
@@ -67,8 +67,6 @@ class RegisterFragment : BaseFragment() {
         registerViewModel.getRegistrationStatus().observe(this, Observer { status ->
             when (status) {
                 true -> {
-                    Toast.makeText(activity, "registered", Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, "" + registerViewModel.getUser().value?.id)
                     SharedPrefUtils.putString(Constants.USER_ID, FirebaseAuth.getInstance().currentUser?.uid.toString())
                     SharedPrefUtils.putBoolean(Constants.IS_LOGGED_IN, true)
 
@@ -93,16 +91,16 @@ class RegisterFragment : BaseFragment() {
             callbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(result: LoginResult?) {
                     val token = result?.accessToken
-                    Log.d(TAG, "onSuccess" + result?.accessToken)
+                    LogUtils.d(TAG,"loginFb : onSuccess : ${token}")
                     registerViewModel.registerFbUser(token!!)
                 }
 
                 override fun onCancel() {
-                    Log.d(TAG, "onCancel")
+                    LogUtils.d(TAG,"onCancel :")
                 }
 
                 override fun onError(error: FacebookException?) {
-                    Log.d(TAG, "onError" + error?.message)
+                    LogUtils.d(TAG,"onError : ${error?.message}")
                     error?.printStackTrace()
                 }
             })
@@ -116,7 +114,6 @@ class RegisterFragment : BaseFragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        LogUtils.d(TAG, "ONACTVTYRESULT")
         super.onActivityResult(requestCode, resultCode, data)
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
