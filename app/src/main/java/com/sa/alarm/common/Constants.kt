@@ -13,5 +13,15 @@ class Constants {
         //FIRESTORE FIELDS
         val USER_LIST="user_list"
 
+        //ROOM TABLE
+        const val DB_NAME="event"
+        const val TABLENAME ="reminder"
+        const val _ID ="_ID"
+        const val EVENT_TITLE ="event_title"
+        const val TIME="time"
+        const val DATE="date"
+
+
+
     }
 }

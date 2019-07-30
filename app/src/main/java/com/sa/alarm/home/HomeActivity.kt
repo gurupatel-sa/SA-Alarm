@@ -2,15 +2,12 @@ package com.sa.alarm.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.FragmentManager
-import com.google.firebase.auth.FacebookAuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.sa.alarm.R
 import com.sa.alarm.auth.AuthActivity
 import com.sa.alarm.base.BaseActivity
 import com.sa.alarm.common.Constants
-import com.sa.alarm.login.LoginFragment
 import com.sa.alarm.users.UsersFragment
 import com.sa.alarm.utils.SharedPrefUtils
 import kotlinx.android.synthetic.main.activity_home.*

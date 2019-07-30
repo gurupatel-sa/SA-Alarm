@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
             android:name=".base.BaseApplication"
@@ -15,25 +16,37 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".home.HomeActivity">
-        </activity>
-        <activity android:name=".splash.SplashActivity">
+        <activity android:name=".ReminderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".home.HomeActivity">
+        </activity>
+        <activity android:name=".splash.SplashActivity">
+
+        </activity>
         <activity android:name=".auth.AuthActivity">
-        </activity>
-        <activity android:name=".splash.DummyActivity">
-        </activity>
-        <activity android:name=".MainActivity">
         </activity>
 
         <meta-data
                 android:name="com.facebook.sdk.ApplicationId"
                 android:value="@string/facebook_app_id"/>
+
+        <receiver android:name=".common.AlarmReceiver">
+            <intent-filter>
+                <action android:name="com.test.intent.action.ALARM" />
+            </intent-filter>
+        </receiver>
+
+        <service
+                android:name=".common.AlarmIntenService"
+                android:enabled="true"
+                android:exported="false"
+        />
+
     </application>
 
 </manifest>
