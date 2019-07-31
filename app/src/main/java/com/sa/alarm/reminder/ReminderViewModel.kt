@@ -1,4 +1,4 @@
-package com.sa.alarm.home
+package com.sa.alarm.reminder
 
 import android.app.Application
 import androidx.lifecycle.*
@@ -13,15 +13,20 @@ class ReminderViewModel( application : Application) : AndroidViewModel(applicati
     var database :AppDatabase
     private var job: Job = Job()
     private val scope = CoroutineScope(job + Dispatchers.IO)
+     var newData : MutableLiveData<Reminder> = MutableLiveData()
+
      var reminderList: MutableLiveData<List<Reminder>> = MutableLiveData()
 
     init {
         database = AppDatabase.getInstance(application.applicationContext)!!
     }
 
-    fun insertReminder() {
+    fun insertReminder(newReminder :Reminder) {
+        LogUtils.d(TAG,"insertReminder :")
         scope.launch {
-            database.reminderDao().insert(Reminder("New ", System.currentTimeMillis()))
+            database.reminderDao().insert(newReminder)
+//            dataInserted.postValue(true)
+            newData.postValue(newReminder)
         }
     }
 
@@ -34,6 +39,5 @@ class ReminderViewModel( application : Application) : AndroidViewModel(applicati
     override fun onCleared() {
         super.onCleared()
         scope.coroutineContext.cancelChildren()
-
     }
 }

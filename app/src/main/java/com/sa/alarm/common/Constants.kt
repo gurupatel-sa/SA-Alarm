@@ -20,7 +20,7 @@ class Constants {
         const val EVENT_TITLE ="event_title"
         const val TIME="time"
         const val DATE="date"
-
+        const val TYPE="type"
 
 
     }

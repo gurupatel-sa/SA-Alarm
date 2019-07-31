@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:text="Note"
+    android:id="@+id/etNote"
+    />
+
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:text="Type"
+              android:id="@+id/etType"
+    />
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="horizontal">
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:id="@+id/btnSetTime"
+        />
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:id="@+id/btnSetDate"
+        />
+
+    </LinearLayout>
+
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:text="Submit"
+            android:id="@+id/btnSubmit"
+    />
+
+
+
+</LinearLayout>

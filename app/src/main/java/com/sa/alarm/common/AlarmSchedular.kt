@@ -5,30 +5,36 @@ import android.content.Context
 import android.os.Build
 import android.app.PendingIntent
 import android.content.Intent
+import com.sa.alarm.R
 import com.sa.alarm.utils.LogUtils
 
 class AlarmSchedular {
-    private val TAG : String = this.javaClass.getSimpleName()
-    fun setAlarm(context:Context , time : Long){
-        
-        LogUtils.d(TAG,"setAlarm :")
-        val manager = AlarmManagerProvider.getAlarmManager(context)
+    private val TAG: String = this.javaClass.getSimpleName()
 
-        var intent = Intent(context, AlarmIntenService::class.java)
-        var pendingIntent = PendingIntent.getService(
-            context, 280192, intent, PendingIntent.FLAG_UPDATE_CURRENT
-        )
+    fun setUpAlarm(context: Context, time: Long) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val alarmpendingIntent = createPendingIntent(context)
 
         if (Build.VERSION.SDK_INT >= 23) {
 
-            manager?.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent)
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, alarmpendingIntent)
 
         } else if (Build.VERSION.SDK_INT >= 19) {
 
-            manager?.setExact(AlarmManager.RTC_WAKEUP, time, pendingIntent)
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, time, alarmpendingIntent)
 
         } else {
-            manager?.set(AlarmManager.RTC_WAKEUP, time, pendingIntent)
+            alarmManager.set(AlarmManager.RTC_WAKEUP, time, alarmpendingIntent)
         }
+
+    }
+
+    fun createPendingIntent(context: Context): PendingIntent {
+        val intent = Intent(context.applicationContext, AlarmReceiver::class.java)
+        intent.action = context.getString(R.string.action_notify_alarm)
+        val pendingIntent: PendingIntent =
+            PendingIntent.getBroadcast(context, 101, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        return pendingIntent
     }
 }

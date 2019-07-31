@@ -12,7 +12,10 @@ data class Reminder(
     var eventTitle:String ="",
 
     @ColumnInfo(name = Constants.TIME)
-    var time:Long=0
+    var time:Long=0 ,
+
+    @ColumnInfo(name = Constants.TYPE)
+    var type:String=""
 
 ){
     @PrimaryKey(autoGenerate = true)
