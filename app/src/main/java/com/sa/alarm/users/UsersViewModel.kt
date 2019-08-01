@@ -31,5 +31,4 @@ class UsersViewModel : ViewModel() {
     fun refreshAdapter() {
         userDataSourceFactory.getItemLiveDataSource().getValue()?.invalidate();
     }
-
 }

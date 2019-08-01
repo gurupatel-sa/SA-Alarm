@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.sa.alarm.R
 import com.sa.alarm.addreminder.AddReminder
 import com.sa.alarm.common.AlarmSchedular
-import com.sa.alarm.db.model.Reminder
 import com.sa.alarm.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_reminder.*
 import java.util.*

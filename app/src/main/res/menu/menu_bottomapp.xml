@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/app_bar_profile"
+            android:icon="@drawable/icon_profile"
+            android:title="@string/action_profile"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/app_bar_setting"
+            android:icon="@drawable/icon_setting"
+            android:title="@string/action_setting"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/app_bar_logout"
+            android:icon="@drawable/icon_logout"
+            android:title="@string/action_logout"
+            app:showAsAction="ifRoom"/>
+
+</menu>

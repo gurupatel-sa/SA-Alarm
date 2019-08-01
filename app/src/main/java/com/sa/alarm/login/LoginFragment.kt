@@ -50,7 +50,7 @@ class LoginFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         init()
-        btnLogin.setOnClickListener {
+        btnRegister.setOnClickListener {
             loginViewModel.loginEmailAuth("ab@gmail.com","12345679")
         }
 

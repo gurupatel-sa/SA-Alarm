@@ -14,6 +14,7 @@ class NetworkReceiver : BroadcastReceiver() {
         LogUtils.d(TAG, "onReceive :")
 
         NetworkUtils.isOnline = isConneted(context!!)
+
         LogUtils.d(TAG, "onReceive : networkInfo " + NetworkUtils.isOnline)
     }
 

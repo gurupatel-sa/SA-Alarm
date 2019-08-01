@@ -5,6 +5,12 @@
     <string name="register">register</string>
     <string name="login">login</string>
 
+    <string name="reminder_title">AlarmReminder</string>
+    <string name="action_notify_alarm">com.sa.intent.alarm</string>
+    <string name="email">Email</string>
+
+
+
     <string name="no_cardetails">Click on the button below to begin creating your reminder!</string>
     <string name="title_activity_add_reminder">Add Reminder</string>
     <string name="title_activity_edit_reminder">Edit Reminder</string>
@@ -44,7 +50,16 @@
     <string name="editor_update_reminder_successful">Reminder updated</string>
 
     <string name="editor_update_reminder_failed">Error with updating reminder</string>
+    <string name="password">Password</string>
+    <string name="login_with_fb">Login with Facebook</string>
+    <string name="user">User</string>
+    <string name="register_with_fb">Register with Facebook</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="name">Name</string>
+    <string name="action_profile">Profile</string>
+    <string name="action_setting">Setting</string>
+    <string name="action_logout">Log out</string>
+    <string name="submit">submit</string>
 
-    <string name="reminder_title">AlarmReminder</string>
-    <string name="action_notify_alarm">com.sa.intent.alarm</string>
+
 </resources>

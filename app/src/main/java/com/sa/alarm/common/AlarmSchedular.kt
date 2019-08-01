@@ -6,7 +6,6 @@ import android.os.Build
 import android.app.PendingIntent
 import android.content.Intent
 import com.sa.alarm.R
-import com.sa.alarm.utils.LogUtils
 
 class AlarmSchedular {
     private val TAG: String = this.javaClass.getSimpleName()

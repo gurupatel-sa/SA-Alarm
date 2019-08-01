@@ -1,16 +1,11 @@
 package com.sa.alarm.home
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import com.google.firebase.auth.FirebaseAuth
 import com.sa.alarm.R
-import com.sa.alarm.auth.AuthActivity
 import com.sa.alarm.base.BaseActivity
-import com.sa.alarm.common.Constants
-import com.sa.alarm.users.UsersFragment
-import com.sa.alarm.utils.SharedPrefUtils
-import kotlinx.android.synthetic.main.activity_home.*
+import com.sa.alarm.dashboard.DashboardFragment
 
 class HomeActivity : BaseActivity() {
 
@@ -18,7 +13,7 @@ class HomeActivity : BaseActivity() {
      var auth :FirebaseAuth = FirebaseAuth.getInstance()
 
     private lateinit var fragmentManager : FragmentManager
-    private val USERS_FRAGMENT_TAG :String ="users_fragment"
+    private val DASHBOARD_FRAGMENT_TAG :String ="users_fragment"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,22 +21,24 @@ class HomeActivity : BaseActivity() {
 
         init()
 
-        button3.setOnClickListener {
-            SharedPrefUtils.remove(Constants.IS_LOGGED_IN)
-            SharedPrefUtils.remove(Constants.USER_ID)
-
-            FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(this , AuthActivity::class.java))
-            finish()
-        }
-
-        loadUsersFragment.setOnClickListener {
-            fragmentManager.beginTransaction().replace(R.id.fmHome, UsersFragment() ,USERS_FRAGMENT_TAG).commit()
-        }
+//        button3.setOnClickListener {
+//            SharedPrefUtils.remove(Constants.IS_LOGGED_IN)
+//            SharedPrefUtils.remove(Constants.USER_ID)
+//
+//            FirebaseAuth.getInstance().signOut()
+//            startActivity(Intent(this , AuthActivity::class.java))
+//            finish()
+//        }
+//
+//        loadUsersFragment.setOnClickListener {
+//            fragmentManager.beginTransaction().replace(R.id.fmHome, DashboardFragment() ,USERS_FRAGMENT_TAG).commit()
+//        }
     }
 
     private fun init() {
         fragmentManager = supportFragmentManager
+        fragmentManager.beginTransaction().replace(R.id.fmHome, DashboardFragment() ,DASHBOARD_FRAGMENT_TAG).commit()
+
     }
 
     override fun onStart() {
