@@ -23,13 +23,16 @@ class AuthActivity : BaseActivity() {
 
         init()
         tvRegister.setOnClickListener {
+            tvRegister.isSelected = true
+            tvLogin.isSelected = false
             fragmentManager.beginTransaction().replace(R.id.fmAuth,RegisterFragment.getInstance() ,REGISTER_FRAGMENT_TAG).commit()
         }
 
         tvLogin.setOnClickListener {
+            tvLogin.isSelected = true
+            tvRegister.isSelected = false
             fragmentManager.beginTransaction().replace(R.id.fmAuth,LoginFragment.getInstance() ,LOGIN_FRAGMENT_TAG).commit()
         }
-
     }
 
     private fun init() {

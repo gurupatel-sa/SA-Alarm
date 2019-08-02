@@ -6,6 +6,7 @@ import com.sa.alarm.db.database.AppDatabase
 import com.sa.alarm.db.model.Reminder
 import com.sa.alarm.utils.LogUtils
 import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 class ReminderViewModel( application : Application) : AndroidViewModel(application) {
 
@@ -25,8 +26,9 @@ class ReminderViewModel( application : Application) : AndroidViewModel(applicati
         LogUtils.d(TAG,"insertReminder :")
         scope.launch {
             database.reminderDao().insert(newReminder)
-//            dataInserted.postValue(true)
             newData.postValue(newReminder)
+
+//            dataInserted.postValue(true)
         }
     }
 

@@ -74,7 +74,7 @@
                     app:counterMaxLength="8"
                     android:textColorHint="@color/colorGrey"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textinput_layout">
+                    android:id="@+id/tilPassword">
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

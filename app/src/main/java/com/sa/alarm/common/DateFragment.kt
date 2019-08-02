@@ -13,7 +13,7 @@ import com.sa.alarm.utils.LogUtils
 class DateFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
     private val TAG : String = this.javaClass.getSimpleName()
     override fun onDateSet(view: DatePicker?, yy: Int, mm: Int, dd: Int) {
-        var hour = Calendar.getInstance().get(Calendar.HOUR )
+        var hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY )
         var min = Calendar.getInstance().get(Calendar.MINUTE )
         val timeInMillis: Long = Calendar.getInstance().run {
             set(yy, mm, dd , hour , min)

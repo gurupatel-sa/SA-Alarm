@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.facebook.AccessToken
-import com.google.firebase.auth.FacebookAuthProvider
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.iid.FirebaseInstanceId
 import com.sa.alarm.common.Constants
@@ -18,6 +17,7 @@ class LoginViewModel : ViewModel() {
     private var isLoginSuccess: MutableLiveData<Boolean> = MutableLiveData()
     private var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     private var faliureMessage: MutableLiveData<String> = MutableLiveData()
+    private var passwordReset: MutableLiveData<Boolean> = MutableLiveData()
     private var rootRef : FirebaseFirestore = FirebaseFirestore.getInstance();
 
     fun loginEmailAuth(email: String, password: String) {
@@ -70,6 +70,30 @@ class LoginViewModel : ViewModel() {
             }
     }
 
+    fun sendEmailForgotPassword(email: String){
+        isLoading.value = true
+        firebaseAuth.sendPasswordResetEmail(email)
+            .addOnSuccessListener {
+                passwordReset.value =true
+                isLoading.value = false
+            }
+            .addOnFailureListener {exception ->
+                try {
+                    throw exception
+                }
+                catch (invalidEmail : FirebaseAuthInvalidUserException)
+                {
+                    LogUtils.d(TAG,"sendEmailForgotPassword :invalidEmail exception" +invalidEmail?.message )
+                }
+                catch (e: Exception) {
+                    LogUtils.d(TAG,"sendEmailForgotPassword :exception" +e?.message )
+
+                }
+                faliureMessage.value =exception.message
+                isLoading.value = false
+            }
+    }
+
 
     fun getLoginStatus() : LiveData<Boolean>{
         return isLoginSuccess
@@ -83,4 +107,11 @@ class LoginViewModel : ViewModel() {
         return faliureMessage
     }
 
+    fun getResetPasswordStatus(): LiveData<Boolean> {
+        return passwordReset
+    }
+
+    fun checkUserEmailExist(email: String) {
+
+    }
 }

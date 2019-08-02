@@ -55,7 +55,7 @@
                     app:counterMaxLength="8"
                     android:textColorHint="@color/colorGrey"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textinput_layout">
+                    android:id="@+id/tilPassword">
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
 
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                      android:id="@+id/txtForgotPassword"
+                      android:id="@+id/tvForgotPassword"
                       android:text="@string/forgot_password"
                       android:textAllCaps="true"
                       android:layout_marginTop="5dp"
@@ -85,7 +85,7 @@
     <Button
             android:text="@string/login"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/btnRegister"
+            android:layout_height="wrap_content" android:id="@+id/btnLogin"
             android:background="@drawable/shape_login"
             app:layout_constraintEnd_toEndOf="parent"
             android:paddingStart="50dp"
@@ -99,13 +99,13 @@
             android:text="@string/login_with_fb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/btnFbLogin"
-            app:layout_constraintTop_toBottomOf="@+id/btnRegister" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLogin" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:drawableStart="@drawable/icon_fb"
             android:drawablePadding="10dp"
             android:background="@drawable/shape_button_dashed"
             android:textColor="@color/colorWhite"
-            app:layout_constraintBottom_toTopOf="@+id/guideline4"/>
+            app:layout_constraintBottom_toTopOf="@+id/guideline4" android:layout_marginTop="8dp"/>
     <androidx.constraintlayout.widget.Guideline
             android:orientation="horizontal"
             android:layout_width="wrap_content"

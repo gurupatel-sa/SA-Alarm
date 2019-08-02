@@ -24,13 +24,12 @@ class AddReminderViewModel : ViewModel() {
 
     fun setReminderTime(time :Long){
         this.time =time
-        LogUtils.d(TAG,"setReminderTime :"+this.time)
     }
 
-    fun addReminder(event:String , type:String) {
+    fun addReminder(event:String , type:Int ,date_ : String ,time_ :String) {
 
         var time = getTimeInMillies(date , time)
-        var reminder :Reminder=Reminder(event , time , type)
+        var reminder :Reminder=Reminder(event , time , type ,date_ ,time_ )
 
         this.reminder.value = reminder
         LogUtils.d(TAG ,"addReminder : time " +reminder.time)
@@ -52,7 +51,7 @@ class AddReminderViewModel : ViewModel() {
         day = calendar.get(Calendar.DAY_OF_MONTH)
 
         calendar.timeInMillis = time
-        hour= calendar.get(Calendar.HOUR)
+        hour= calendar.get(Calendar.HOUR_OF_DAY)
         min= calendar.get(Calendar.MINUTE)
 
         Log.d(TAG ,"getTimeInMillies :"+date +" "+year+" ")

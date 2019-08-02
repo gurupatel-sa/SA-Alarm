@@ -1,5 +1,7 @@
 package com.sa.alarm.login
 
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,6 +24,12 @@ import com.sa.alarm.home.HomeActivity
 import com.sa.alarm.utils.LogUtils
 import com.sa.alarm.utils.SharedPrefUtils
 import kotlinx.android.synthetic.main.fragment_login.*
+import android.util.Patterns
+import android.text.TextUtils
+import kotlinx.android.synthetic.main.dialog_forgot_password.*
+import kotlinx.android.synthetic.main.fragment_login.etEmail
+import android.view.inputmethod.InputMethodManager
+import android.app.Activity
 
 class LoginFragment : BaseFragment() {
 
@@ -35,11 +43,13 @@ class LoginFragment : BaseFragment() {
             return loginInstance as LoginFragment
         }
     }
+
     private val TAG : String = this.javaClass.getSimpleName()
     private val PERMISSION_LIST = listOf("email", "public_profile")
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var callbackManager: CallbackManager
+    private lateinit var dialog: Dialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         LogUtils.d(TAG,"onCreateView")
@@ -50,13 +60,20 @@ class LoginFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         init()
-        btnRegister.setOnClickListener {
-            loginViewModel.loginEmailAuth("ab@gmail.com","12345679")
+        btnLogin.setOnClickListener {
+            if(isValid()){
+                loginViewModel.loginEmailAuth(etEmail.text.toString(),etPassword.text.toString())
+            }
         }
 
         btnFbLogin.setOnClickListener {
             loginFbUser()
         }
+
+        tvForgotPassword.setOnClickListener {
+            openForgotPasswordDialog()
+        }
+
 
         loginViewModel.getLoginStatus().observe(this, Observer { status ->
             when (status) {
@@ -64,7 +81,6 @@ class LoginFragment : BaseFragment() {
                     SharedPrefUtils.putBoolean(Constants.IS_LOGGED_IN, true)
                     SharedPrefUtils.putString(Constants.USER_ID, FirebaseAuth.getInstance().currentUser?.uid.toString())
                     startActivity(Intent(activity!!, HomeActivity::class.java))
-
                     activity!!.finish()
                 }
             }
@@ -77,6 +93,86 @@ class LoginFragment : BaseFragment() {
         loginViewModel.getFailureMessage().observe(this , Observer { exceptionMessage ->
             Toast.makeText(activity, "Failed : ${exceptionMessage}", Toast.LENGTH_SHORT).show()
         })
+
+        loginViewModel.getResetPasswordStatus().observe(this , Observer {status ->
+            if(status){
+                dialog.dismiss()
+                Toast.makeText(activity!!, getString(R.string.password_reset_successful), Toast.LENGTH_SHORT).show();
+            }
+
+        })
+    }
+
+    private fun openForgotPasswordDialog() {
+        dialog = Dialog(context!!)
+        dialog.setContentView(R.layout.dialog_forgot_password);
+
+        dialog.btnForgotPassword.setOnClickListener {
+            dismissKeyboard(activity!!)
+
+            val email = dialog.etMail?.text.toString()
+
+            if(dialogValidation(email , dialog)){
+                loginViewModel.sendEmailForgotPassword(email)
+            }
+
+        }
+        val window = dialog.getWindow()
+        window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        dialog.show()
+    }
+
+    fun dismissKeyboard(activity: Activity) {
+        val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        if (null != activity.currentFocus)
+            imm.hideSoftInputFromWindow(
+                activity.currentFocus!!
+                    .applicationWindowToken, 0
+            )
+    }
+
+    private fun dialogValidation(email: String ,dialog:Dialog): Boolean {
+        if(email.isEmpty()){
+            dialog.etMail.error = resources.getString(R.string.error_email_empty)
+            return false
+        }
+        else if(!isValidEmail(email)){
+            dialog.etMail.error = resources.getString(R.string.error_email_invalid)
+            return false
+        }
+        return true
+    }
+
+    private fun isValid(): Boolean {
+        val email = etEmail.text.toString()
+        val password =etPassword.text.toString()
+        if(email.isEmpty()){
+            etEmail.error = resources.getString(R.string.error_email_empty)
+
+            return false
+        }
+        else if(!isValidEmail(email)){
+            etEmail.error = resources.getString(R.string.error_email_invalid)
+
+            return false
+        }
+        else if(password.isEmpty()){
+            tilPassword.error=resources.getString(R.string.error_password_empty)
+
+            return false
+        }
+        else if(password.length < 8){
+            tilPassword.error=resources.getString(R.string.error_password_invalid)
+
+            return false
+        }
+        tilPassword.isErrorEnabled=false
+        return true
+    }
+
+    fun isValidEmail(target: CharSequence): Boolean {
+        return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
 
     private fun init() {

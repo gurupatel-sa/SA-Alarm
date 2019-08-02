@@ -60,6 +60,16 @@
     <string name="action_setting">Setting</string>
     <string name="action_logout">Log out</string>
     <string name="submit">submit</string>
+    <string name="send_password">Send Password</string>
+    <string name="error_password_invalid">Minimum length should be 8</string>
+    <string name="error_password_empty">Please Enter Email</string>
+    <string name="error_email_invalid">Invalid Email</string>
+    <string name="error_email_empty">Please Enter Email</string>
+    <string name="forgot_password_title">Forgot Password</string>
+    <string name="password_reset_successful">Password sent to registered email</string>
+    <string name="error_name_empty">Please Enter name</string>
+    <string name="erro_reminder_empty">Enter reminder title</string>
+    <string name="error_time_empty">Select time</string>
 
 
 </resources>

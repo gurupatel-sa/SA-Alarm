@@ -21,7 +21,7 @@ class Constants {
         const val TIME="time"
         const val DATE="date"
         const val TYPE="type"
-
+        const val TIMESTAMP="timestamp"
 
     }
 }

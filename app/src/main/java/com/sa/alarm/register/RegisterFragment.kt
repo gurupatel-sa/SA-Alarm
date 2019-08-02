@@ -2,6 +2,8 @@ package com.sa.alarm.register
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,7 +57,9 @@ class RegisterFragment : BaseFragment() {
 
         btnRegister.setOnClickListener {
             if (NetworkUtils.isOnline) {
-                registerViewModel.registerEmailUser(etEmail.text.toString(), "12345679", etPassword.text.toString())
+                if(isValid()){
+                    registerViewModel.registerEmailUser(etEmail.text.toString(), etPassword.text.toString(), etName.text.toString())
+                }
             }
         }
         btnFbRegister.setOnClickListener {
@@ -83,6 +87,40 @@ class RegisterFragment : BaseFragment() {
         registerViewModel.getProgresBar().observe(this, Observer { isLoading ->
             if(isLoading) pgbRegister.visibility = View.VISIBLE else pgbRegister.visibility = View.GONE
         })
+    }
+
+    private fun isValid(): Boolean {
+        val email = etEmail.text.toString()
+        val password =etPassword.text.toString()
+        val name =etName.text.toString()
+
+        if(email.isEmpty()){
+            etEmail.error = resources.getString(R.string.error_email_empty)
+            return false
+        }
+        else if(!isValidEmail(email)){
+            etEmail.error = resources.getString(R.string.error_email_invalid)
+            return false
+        }
+
+        else if(name.isEmpty()){
+            etName.error =resources.getString(R.string.error_name_empty)
+            return false
+        }
+        else if(password.isEmpty()){
+            tilPassword.error=resources.getString(R.string.error_password_empty)
+            return false
+        }
+        else if(password.length <= 8){
+            tilPassword.error=resources.getString(R.string.error_password_invalid)
+
+            return false
+        }
+        return true
+    }
+
+    fun isValidEmail(target: CharSequence): Boolean {
+        return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
 
     private fun registerFbUser() {

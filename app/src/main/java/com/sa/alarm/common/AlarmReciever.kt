@@ -23,8 +23,9 @@ class AlarmReceiver : BroadcastReceiver() {
 
                 WakeLocker.acquire(context!!)
 
+
                 LogUtils.d(TAG, "onReceive : notificatio")
-                NotificationUtils.createNotification("Name", "Title", context!!)
+                NotificationUtils.createNotification(intent.getStringExtra("title"), "reminder", context!!)
             }
 
 
