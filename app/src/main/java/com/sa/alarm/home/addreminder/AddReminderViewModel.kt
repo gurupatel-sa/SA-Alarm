@@ -1,4 +1,4 @@
-package com.sa.alarm.addreminder
+package com.sa.alarm.home.addreminder
 
 import android.util.Log
 import androidx.lifecycle.LiveData

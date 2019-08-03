@@ -1,10 +1,10 @@
-package com.sa.alarm.users
+package com.sa.alarm.home.users
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import com.google.firebase.firestore.Query
-import com.sa.alarm.register.model.User
+import com.sa.alarm.auth.register.model.User
 import com.sa.alarm.utils.LogUtils
 
 class UserDataSourceFactory : DataSource.Factory<Query, User>() {
@@ -18,7 +18,6 @@ class UserDataSourceFactory : DataSource.Factory<Query, User>() {
         val itemDataSource = UserDataSource()
         itemLiveDataSource.postValue(itemDataSource)
         return itemDataSource
-
     }
 
     fun getItemLiveDataSource(): MutableLiveData<PageKeyedDataSource<Query, User>> {

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:padding="10dp"
+              android:layout_height="match_parent">
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text="Select From Camera"
+              android:padding="@dimen/_10sdp"
+              android:textSize="16sp"
+              android:textStyle="bold"
+              android:id="@+id/tvSelectCamera"
+    />
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text="Select From Gallary"
+              android:padding="@dimen/_10sdp"
+              android:textStyle="bold"
+              android:textSize="16sp"
+              android:id="@+id/tvSelectGallary"
+    />
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.sa.alarm.users
+package com.sa.alarm.home.users
 
 import androidx.paging.PageKeyedDataSource
 import com.google.android.gms.tasks.Task
@@ -6,7 +6,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.sa.alarm.common.Constants
-import com.sa.alarm.register.model.User
+import com.sa.alarm.auth.register.model.User
 import com.sa.alarm.utils.LogUtils
 
 class UserDataSource : PageKeyedDataSource<Query, User>() {
@@ -27,6 +27,7 @@ class UserDataSource : PageKeyedDataSource<Query, User>() {
     }
 
     override fun loadInitial(params: LoadInitialParams<Query>, callback: LoadInitialCallback<Query, User>) {
+
         LogUtils.d(TAG,"loadInitial :")
         nextQuery
             .get()
@@ -38,7 +39,7 @@ class UserDataSource : PageKeyedDataSource<Query, User>() {
                     val lastVisible = docSnapshot!![docSnapshot.size-1]
 
                     LogUtils.d(TAG,"retreiveUserList : ${task.result?.size()}" )
-                    var userList = ArrayList<User>()
+                    val userList = ArrayList<User>()
                     for (document in docSnapshot){
                         val user = document.toObject(User::class.java)
                         userList.add(user!!)

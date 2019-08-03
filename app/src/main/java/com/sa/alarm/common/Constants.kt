@@ -11,7 +11,12 @@ class Constants {
         var FAILED ="Failed"
 
         //FIRESTORE FIELDS
-        val USER_LIST="user_list"
+        val USER_LIST="user_list" //collection
+        val FOLLOW_LIST: String="follow_list" //collection
+
+        val IMAGEURL ="https://firebasestorage.googleapis.com/v0/b/sa-alarm.appspot.com/o/profile.png?alt=media&token=9005444c-3d2d-461f-b29e-ec4994213e77"
+        val IS_FOLLOWING:String = "is_following"
+
 
         //ROOM TABLE
         const val DB_NAME="event"

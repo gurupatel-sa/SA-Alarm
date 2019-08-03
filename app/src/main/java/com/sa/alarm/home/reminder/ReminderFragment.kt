@@ -1,4 +1,4 @@
-package com.sa.alarm.reminder
+package com.sa.alarm.home.reminder
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +8,9 @@ import com.sa.alarm.R
 import com.sa.alarm.base.BaseFragment
 import com.sa.alarm.utils.LogUtils
 import kotlinx.android.synthetic.main.fragment_reminder.*
-import android.graphics.Rect
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.sa.alarm.addreminder.AddReminder
-import com.sa.alarm.common.AlarmSchedular
+import com.sa.alarm.home.addreminder.AddReminder
 import com.sa.alarm.home.HomeActivity
 
 class ReminderFragment :BaseFragment() {
@@ -32,8 +30,6 @@ class ReminderFragment :BaseFragment() {
         }
     }
 
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         LogUtils.d(TAG,"onCreateView")
         return inflater.inflate(R.layout.fragment_reminder , container ,false)
@@ -48,25 +44,25 @@ class ReminderFragment :BaseFragment() {
             (activity as HomeActivity).replaceFragments(AddReminder.TAG , AddReminder.getInstance())
         }
 
-        appbar.setOnClickListener {
-        }
+        appbar.setNavigationOnClickListener(View.OnClickListener {
+            //open bottom sheet
+            val bottomSheetDialogFragment = BottomSheetFragment().newInstance()
+            bottomSheetDialogFragment.show(activity!!.supportFragmentManager, "Bottom Sheet Dialog Fragment")
+        })
 
         reminderViewModel.newData.observe(activity!! , Observer {dataInserted ->
             LogUtils.d(TAG,"new alarm inserted :"+dataInserted.timestamp)
-//            AlarmSchedular().setUpAlarm(activity!!.applicationContext ,dataInserted)
         })
+
+
 
         reminderViewModel.reminderList.observe(this, Observer {
             LogUtils.d(TAG, "observe  :" + it?.size)
-
-//            NotificationUtils.createNotification(this)
-//            NotificationUtils.createNotification("a","aa",applicationContext)
         })
     }
 
     private fun init() {
         reminderViewModel = ViewModelProviders.of(this).get(ReminderViewModel::class.java)
-
         reminderViewModel.getReminder()
     }
 }

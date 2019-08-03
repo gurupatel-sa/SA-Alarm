@@ -50,14 +50,13 @@ class NotificationUtils {
                     .setContentTitle(title)
                     .setContentText(desc)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .addAction(R.drawable.icon_lock , "SNOOZE", PendingIntent.getActivity(context , 0 ,intent,PendingIntent.FLAG_UPDATE_CURRENT ))
+//                    .addAction(R.drawable.icon_lock , "SNOOZE", PendingIntent.getActivity(context , 0 ,intent,PendingIntent.FLAG_UPDATE_CURRENT ))
                 val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
                 mBuilder.setSound(uri)
 
 //                val contentView = RemoteViews(context.getPackageName(), R.layout.notification_layout)
-//
-//                setListeners(contentView)//look at step 3
+//                setListeners(contentView)
 
 
                 val notificationManager = NotificationManagerCompat.from(context)

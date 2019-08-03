@@ -3,7 +3,8 @@
 <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -15,27 +16,7 @@
             android:background="@color/colorBlue"
             android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar android:layout_width="match_parent"
-                                           android:layout_height="wrap_content"
-                                           android:id="@+id/toolbar"
-                                           android:elevation="1dp"
-                                           app:layout_constraintStart_toStartOf="parent"
-                                           app:layout_constraintEnd_toEndOf="parent"
-                                           app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:background="@drawable/icon_back_arrow"
-                       android:id="@+id/ivBack"
-            />
-
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="Add Reminder"
-                      android:textSize="18sp"
-                      android:textColor="@color/colorWhite"
-                      android:textStyle="bold"
-                      android:layout_marginStart="@dimen/_30sdp"
-            />
-        </androidx.appcompat.widget.Toolbar>
+        <include layout="@layout/toolbar_main" android:id="@+id/toolbar"/>
 
 
         <View
@@ -102,6 +83,7 @@
                 android:backgroundTint="@color/colorWhite"
                 app:layout_constraintStart_toStartOf="@+id/tvType"
                 android:layout_marginTop="8dp"/>
+
         <TextView
                 android:text="Type"
                 android:textSize="14sp"

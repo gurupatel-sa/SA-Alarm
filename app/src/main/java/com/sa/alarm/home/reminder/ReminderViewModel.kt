@@ -1,4 +1,4 @@
-package com.sa.alarm.reminder
+package com.sa.alarm.home.reminder
 
 import android.app.Application
 import androidx.lifecycle.*
@@ -6,7 +6,6 @@ import com.sa.alarm.db.database.AppDatabase
 import com.sa.alarm.db.model.Reminder
 import com.sa.alarm.utils.LogUtils
 import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
 class ReminderViewModel( application : Application) : AndroidViewModel(application) {
 

@@ -1,4 +1,4 @@
-package com.sa.alarm.users
+package com.sa.alarm.home.users
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,14 +10,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sa.alarm.R
 import com.sa.alarm.base.BaseFragment
-import com.sa.alarm.users.adapter.ItemAdapter
+import com.sa.alarm.home.HomeActivity
+import com.sa.alarm.home.users.adapter.ItemAdapter
 import com.sa.alarm.utils.LogUtils
 import kotlinx.android.synthetic.main.fragment_users.*
+import kotlinx.android.synthetic.main.fragment_users.pgbLogin
+import kotlinx.android.synthetic.main.toolbar_main.view.*
 
 class UsersFragment :BaseFragment() {
     companion object {
         private var usersInstance: UsersFragment? = null
-
+        val TAG : String = "UsersFragment"
         fun getInstance(): UsersFragment {
             if (usersInstance == null) {
                 usersInstance = UsersFragment()
@@ -25,7 +28,6 @@ class UsersFragment :BaseFragment() {
             return usersInstance as UsersFragment
         }
     }
-    private val TAG : String = this.javaClass.getSimpleName()
 
     private lateinit var usersViewModel : UsersViewModel
 
@@ -39,13 +41,23 @@ class UsersFragment :BaseFragment() {
         init()
 
         swrLoadNewUser.setOnRefreshListener {
-            usersViewModel
+
             swrLoadNewUser.isRefreshing = false
             usersViewModel.refreshAdapter()
         }
+        toolbar.ivBack.setOnClickListener {
+            (activity as HomeActivity).supportFragmentManager.popBackStackImmediate();
+        }
+
+        usersViewModel.getProgresBar().observe(this, Observer { isLoading ->
+            if(isLoading) pgbLogin.visibility = View.VISIBLE else pgbLogin.visibility = View.GONE
+        })
     }
 
     private fun init() {
+
+        toolbar.tvTitle.setText(resources.getText(R.string.title_user))
+
         usersViewModel = ViewModelProviders.of(this).get(UsersViewModel::class.java)
 
         rvUsers.setLayoutManager(LinearLayoutManager(context , RecyclerView.VERTICAL,false))
@@ -55,9 +67,9 @@ class UsersFragment :BaseFragment() {
 
         usersViewModel.userPagedList.observe(this , Observer {
             adapter.submitList(it)
+            usersViewModel.isLoading.value =false
         })
 
         rvUsers.setAdapter(adapter)
     }
-
 }

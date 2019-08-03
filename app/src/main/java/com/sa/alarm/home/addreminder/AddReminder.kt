@@ -1,4 +1,4 @@
-package com.sa.alarm.addreminder
+package com.sa.alarm.home.addreminder
 
 import android.app.Activity
 import android.content.Intent
@@ -12,7 +12,7 @@ import com.sa.alarm.base.BaseFragment
 import com.sa.alarm.common.DateFragment
 import com.sa.alarm.common.TimeFragment
 import com.sa.alarm.home.HomeActivity
-import com.sa.alarm.reminder.ReminderViewModel
+import com.sa.alarm.home.reminder.ReminderViewModel
 import com.sa.alarm.utils.LogUtils
 import kotlinx.android.synthetic.main.fragment_addreminder.*
 import android.widget.ArrayAdapter
@@ -20,6 +20,7 @@ import android.widget.Toast
 import com.sa.alarm.R
 import com.sa.alarm.common.AlarmSchedular
 import com.sa.alarm.utils.DateTimeUtils
+import kotlinx.android.synthetic.main.toolbar_main.view.*
 import java.util.*
 
 class AddReminder : BaseFragment() {
@@ -55,7 +56,7 @@ class AddReminder : BaseFragment() {
             newFragment.show(fragmentManager!!, "DatePicker")
         }
 
-        ivBack.setOnClickListener {
+        toolbar.ivBack.setOnClickListener {
             (activity as HomeActivity).supportFragmentManager.popBackStackImmediate();
         }
 
@@ -85,11 +86,13 @@ class AddReminder : BaseFragment() {
             reminderViewModel.insertReminder(reminder)
             AlarmSchedular().setUpAlarm(activity!!.applicationContext ,reminder)
 
-            Toast.makeText(activity!!, "Reminder Added Succcessfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity!!, resources.getText(R.string.reminder_added), Toast.LENGTH_SHORT).show();
         })
     }
 
     private fun init() {
+        toolbar.tvTitle.setText(resources.getText(R.string.title_add_reminder))
+
         addReminderViewModel = ViewModelProviders.of(this).get(AddReminderViewModel::class.java)
         spinnerAdapter = ArrayAdapter<String>(activity!!, android.R.layout.simple_spinner_dropdown_item, items)
         spType.adapter = spinnerAdapter

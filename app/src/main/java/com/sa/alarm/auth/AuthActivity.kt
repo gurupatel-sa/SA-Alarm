@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import com.sa.alarm.R
 import com.sa.alarm.base.BaseActivity
-import com.sa.alarm.login.LoginFragment
-import com.sa.alarm.register.RegisterFragment
+import com.sa.alarm.auth.login.LoginFragment
+import com.sa.alarm.auth.register.RegisterFragment
 import kotlinx.android.synthetic.main.activity_auth.*
 import com.google.firebase.auth.FirebaseAuth
 import com.sa.alarm.utils.LogUtils

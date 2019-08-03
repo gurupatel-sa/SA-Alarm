@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.firebase.auth.FirebaseAuth
 import com.sa.alarm.R
 import com.sa.alarm.base.BaseActivity
-import com.sa.alarm.reminder.ReminderFragment
+import com.sa.alarm.home.reminder.ReminderFragment
 
 class HomeActivity : BaseActivity() {
 
@@ -23,15 +23,6 @@ class HomeActivity : BaseActivity() {
         setContentView(R.layout.activity_home)
 
         init()
-
-//        button3.setOnClickListener {
-//            SharedPrefUtils.remove(Constants.IS_LOGGED_IN)
-//            SharedPrefUtils.remove(Constants.USER_ID)
-//
-//            FirebaseAuth.getInstance().signOut()
-//            startActivity(Intent(this , AuthActivity::class.java))
-//            finish()
-//        }
 //
 //        loadUsersFragment.setOnClickListener {
 //            fragmentManager.beginTransaction().replace(R.id.fmHome, ReminderFragment() ,USERS_FRAGMENT_TAG).commit()

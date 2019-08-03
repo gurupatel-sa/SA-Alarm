@@ -18,13 +18,12 @@
             style="@style/Widget.MaterialComponents.BottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
+            android:layout_gravity="bottom|end"
             app:backgroundTint="@color/colorBlue"
-            app:fabAlignmentMode="center"
+            app:fabAlignmentMode="end"
             app:fabCradleMargin="10dp"
             app:fabCradleRoundedCornerRadius="10dp"
             app:navigationIcon="@drawable/icon_menu"
-            app:menu="@menu/menu_bottomapp"
     >
     </com.google.android.material.bottomappbar.BottomAppBar>
 
