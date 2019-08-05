@@ -7,12 +7,14 @@ import java.util.*
 class DateTimeUtils {
     companion object{
         @SuppressLint("SimpleDateFormat")
+        //convert timeinmillis to date string
          fun getDate(time: Long): String {
             val cal = Calendar.getInstance()
             cal.timeInMillis = time
             return cal.get(Calendar.DAY_OF_MONTH).toString() + " " + DateFormatSymbols().getMonths()[cal.get(Calendar.MONTH)]
         }
 
+        //convert timeinmillis to time string
         fun getTime(time: Long): String {
             val cal = Calendar.getInstance()
             cal.timeInMillis = time
@@ -23,7 +25,7 @@ class DateTimeUtils {
             else
                 min=cal.get(Calendar.MINUTE).toString()
 
-            var type = if (cal.get(Calendar.AM_PM) == 1) {
+            val type = if (cal.get(Calendar.AM_PM) == 1) {
                 "PM"
             } else {
                 "AM"

@@ -10,5 +10,7 @@ data class User constructor (
     var token:String ="-1",
     var displayName: String="",
     @ServerTimestamp
-    var timestamp: Date?=null
+    var timestamp: Date?=null ,
+    var availability_status :Boolean = true ,
+    var notification_status :Boolean = true
 )

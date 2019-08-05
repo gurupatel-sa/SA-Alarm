@@ -12,6 +12,7 @@ import com.sa.alarm.auth.AuthActivity
 import com.sa.alarm.common.Constants
 import com.sa.alarm.home.HomeActivity
 import com.sa.alarm.home.profile.ProfileFragment
+import com.sa.alarm.home.settings.SettingsFragment
 import com.sa.alarm.home.users.UsersFragment
 import com.sa.alarm.utils.SharedPrefUtils
 import kotlinx.android.synthetic.main.fragment_bottom_sheet.*
@@ -53,13 +54,11 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
             (activity as HomeActivity).replaceFragments(ProfileFragment.TAG , ProfileFragment.getInstance())
         }
 
-        dialog.tvLogout.setOnClickListener {
-            SharedPrefUtils.remove(Constants.IS_LOGGED_IN)
-            SharedPrefUtils.remove(Constants.USER_ID)
+        dialog.tvSettings.setOnClickListener {
+            dialog.dismiss()
+            (activity as HomeActivity).replaceFragments(SettingsFragment.TAG , SettingsFragment.getInstance())
 
-            FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(activity!! , AuthActivity::class.java))
-            activity!!.finish()
+
 
         }
     }

@@ -80,9 +80,15 @@ class AddReminder : BaseFragment() {
             }
         }
 
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
         addReminderViewModel.getReminder().observe(activity!!, Observer { reminder ->
             LogUtils.d(TAG, "getReminder observe :")
-            var reminderViewModel = ViewModelProviders.of(activity!!).get(ReminderViewModel::class.java)
+            val reminderViewModel = ViewModelProviders.of(activity!!).get(ReminderViewModel::class.java)
             reminderViewModel.insertReminder(reminder)
             AlarmSchedular().setUpAlarm(activity!!.applicationContext ,reminder)
 

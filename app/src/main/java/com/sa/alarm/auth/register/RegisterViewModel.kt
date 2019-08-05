@@ -35,7 +35,10 @@ class RegisterViewModel : ViewModel() {
                             photoUrl = Constants.IMAGEURL ,
                             token = FirebaseInstanceId.getInstance().token.toString() ,
                             displayName = name ,
-                            timestamp =  Calendar.getInstance().time
+                            timestamp =  Calendar.getInstance().time ,
+                            availability_status = true ,
+                            notification_status = true
+
                         )
                         addUserInDb(user)
                     }
@@ -43,13 +46,7 @@ class RegisterViewModel : ViewModel() {
                 else {
                     LogUtils.d(TAG, "onFaliure " +  task.exception?.message)
                     faliureMessage.value = task.exception?.message
-//                    try {
-//                        throw task.exception!!
-//                    } catch (e: FirebaseAuthWeakPasswordException) {
-//                    } catch (e: FirebaseAuthInvalidCredentialsException) {
-//                    } catch (e: FirebaseAuthUserCollisionException) {
-//                    } catch (e: Exception) {
-//                    }
+
                     isRegistrationSuccess.value = false
                     isLoading.value = false
                 }
@@ -82,8 +79,9 @@ class RegisterViewModel : ViewModel() {
                             photoUrl = it.photoUrl.toString() ,
                             token = FirebaseInstanceId.getInstance().token.toString() ,
                             displayName = it.displayName.toString() ,
-                            timestamp =  Calendar.getInstance().time
-
+                            timestamp =  Calendar.getInstance().time ,
+                            availability_status = true ,
+                            notification_status = true
                         )
                         addUserInDb(user)
                     }
@@ -100,7 +98,6 @@ class RegisterViewModel : ViewModel() {
     fun getRegistrationStatus(): LiveData<Boolean> {
         return isRegistrationSuccess
     }
-
 
     fun getProgresBar(): LiveData<Boolean> {
         return isLoading

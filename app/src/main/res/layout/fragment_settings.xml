@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/toolbar_main"
+    android:id="@+id/toolbar"
+    />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:padding="@dimen/_10sdp"
+    >
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  android:text="@string/notifications"
+                  android:layout_weight="1"
+                  android:textSize="18sp"
+        />
+        <Switch android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:checked="true"
+                android:id="@+id/swNotification"
+        />
+    </LinearLayout>
+    <View android:layout_width="match_parent" android:layout_height="1dp"
+          android:background="@color/colorBlue"
+          />
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:padding="@dimen/_10sdp"
+    >
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  android:text="@string/availibility"
+                  android:layout_weight="1"
+                  android:textSize="18sp"
+        />
+        <Switch android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:checked="true"
+                android:id="@+id/swAvailability"
+        />
+    </LinearLayout>
+    <View android:layout_width="match_parent" android:layout_height="1dp"
+          android:background="@color/colorBlue"
+    />
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:padding="@dimen/_10sdp"
+    >
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  android:text="@string/change_password"
+                  android:layout_weight="1"
+                  android:textSize="18sp"
+                  android:id="@+id/tvChangePassword"
+                  android:textColor="@color/colorGreen"
+        />
+
+    </LinearLayout>
+
+    <View android:layout_width="match_parent" android:layout_height="1dp"
+          android:background="@color/colorBlue"
+    />
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:padding="@dimen/_10sdp"
+    >
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  android:text="@string/log_out"
+                  android:textColor="@color/colorAccent"
+                  android:layout_weight="1"
+                  android:textSize="18sp"
+                  android:id="@+id/tvLogout"
+        />
+
+    </LinearLayout>
+
+</LinearLayout>
