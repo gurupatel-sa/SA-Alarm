@@ -20,6 +20,7 @@ class UserDataSourceFactory : DataSource.Factory<Query, User>() {
         return itemDataSource
     }
 
+
     fun getItemLiveDataSource(): MutableLiveData<PageKeyedDataSource<Query, User>> {
         return itemLiveDataSource
     }

@@ -24,6 +24,7 @@ class ReminderViewModel(application: Application) : AndroidViewModel(application
         getOtherReminders()
     }
 
+    //insert reminde in db
     fun insertReminder(newReminder: Reminder) {
         LogUtils.d(TAG, "insertReminder :")
         scope.launch {
@@ -33,12 +34,14 @@ class ReminderViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    //fetch my rmeinders
     fun getMyReminders() {
         scope.launch {
             myReminderList.postValue(database.reminderDao().getMyReminders())
         }
     }
 
+    //fetch other rmeinders
     fun getOtherReminders() {
         scope.launch {
             otherReminderList.postValue(database.reminderDao().getOtherReminders())

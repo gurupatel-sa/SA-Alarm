@@ -23,10 +23,7 @@ class HomeActivity : BaseActivity() {
         setContentView(R.layout.activity_home)
 
         init()
-//
-//        loadUsersFragment.setOnClickListener {
-//            fragmentManager.beginTransaction().replace(R.id.fmHome, ReminderFragment() ,USERS_FRAGMENT_TAG).commit()
-//        }
+
     }
 
     private fun init() {
@@ -36,7 +33,7 @@ class HomeActivity : BaseActivity() {
 
     }
 
-
+    //replaces fragment from other fragment
     fun replaceFragments(TAG: String, f: Fragment) {
         fragmentManager.beginTransaction().replace(R.id.fmHome, f, TAG).addToBackStack(TAG).commit()
     }

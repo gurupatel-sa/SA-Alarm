@@ -35,6 +35,7 @@ class UsersViewModel : ViewModel() {
         userPagedList = LivePagedListBuilder(userDataSourceFactory, config).build()
     }
 
+    //fetch new data again by pull to refresh
     fun refreshAdapter() {
         userDataSourceFactory.getItemLiveDataSource().getValue()?.invalidate();
     }

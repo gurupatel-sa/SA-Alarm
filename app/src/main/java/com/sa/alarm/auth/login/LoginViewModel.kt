@@ -20,6 +20,7 @@ class LoginViewModel : ViewModel() {
     private var passwordReset: MutableLiveData<Boolean> = MutableLiveData()
     private var rootRef : FirebaseFirestore = FirebaseFirestore.getInstance();
 
+    //email user login
     fun loginEmailAuth(email: String, password: String) {
         isLoading.value = true
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
@@ -36,6 +37,7 @@ class LoginViewModel : ViewModel() {
         }
     }
 
+    //token update for notifciation
     fun updateToken(uid:String){
         rootRef.collection(Constants.USER_LIST)
             .document(uid)
@@ -51,6 +53,7 @@ class LoginViewModel : ViewModel() {
             }
     }
 
+    //fb user login
     fun loginFbAuth(token: AccessToken) {
         isLoading.value = true
 
@@ -70,6 +73,7 @@ class LoginViewModel : ViewModel() {
             }
     }
 
+    //forgot password mail send
     fun sendEmailForgotPassword(email: String){
         isLoading.value = true
         firebaseAuth.sendPasswordResetEmail(email)
@@ -95,23 +99,25 @@ class LoginViewModel : ViewModel() {
     }
 
 
+    //gives callback when login is successful
     fun getLoginStatus() : LiveData<Boolean>{
         return isLoginSuccess
     }
 
+    //show progrssbar till network request
     fun getProgresBar(): LiveData<Boolean>{
         return isLoading
     }
 
+    //show toast when login failed
     fun getFailureMessage(): LiveData<String> {
         return faliureMessage
     }
+
 
     fun getResetPasswordStatus(): LiveData<Boolean> {
         return passwordReset
     }
 
-    fun checkUserEmailExist(email: String) {
 
-    }
 }

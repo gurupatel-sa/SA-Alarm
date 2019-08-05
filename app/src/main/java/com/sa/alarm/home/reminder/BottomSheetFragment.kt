@@ -57,9 +57,6 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
         dialog.tvSettings.setOnClickListener {
             dialog.dismiss()
             (activity as HomeActivity).replaceFragments(SettingsFragment.TAG , SettingsFragment.getInstance())
-
-
-
         }
     }
 }

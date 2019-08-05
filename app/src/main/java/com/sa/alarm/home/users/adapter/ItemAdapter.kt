@@ -52,6 +52,7 @@ class ItemAdapter(var context: Context): PagedListAdapter<User, ItemAdapter.Item
 
     companion object {
 
+        //compares adapter data
         private val diffCallback = object : DiffUtil.ItemCallback<User>() {
             override fun areItemsTheSame(oldItem: User, newItem: User): Boolean =
                 oldItem.uid == newItem.uid

@@ -1,5 +1,9 @@
 package com.sa.alarm.utils
 
+/**
+ * Created by guru on 29/7/19
+ */
+
 import android.content.Context
 import android.net.ConnectivityManager
 import android.widget.Toast
@@ -10,8 +14,6 @@ import android.net.Network
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import android.os.Build
-
-
 
 
 class NetworkUtils {

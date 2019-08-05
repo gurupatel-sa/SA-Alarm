@@ -22,6 +22,7 @@ class RegisterViewModel : ViewModel() {
 
     var TAG = "RegisterViewmodel"
 
+    //register email user
     fun registerEmailUser(mail: String, password: String, name: String) {
         isLoading.value = true
         firebaseAuth.createUserWithEmailAndPassword(mail, password)
@@ -53,6 +54,7 @@ class RegisterViewModel : ViewModel() {
             }
     }
 
+    //add user info in firestor databse
      fun addUserInDb(user: User) {
          rootRef.collection(Constants.USER_LIST)
              .document(user.uid)
@@ -65,6 +67,7 @@ class RegisterViewModel : ViewModel() {
              }
     }
 
+    //register fb user
     fun registerFbUser(token: AccessToken) {
         isLoading.value = true
         val credential = FacebookAuthProvider.getCredential(token.token)
@@ -95,6 +98,7 @@ class RegisterViewModel : ViewModel() {
             }
     }
 
+    //check registration successful
     fun getRegistrationStatus(): LiveData<Boolean> {
         return isRegistrationSuccess
     }

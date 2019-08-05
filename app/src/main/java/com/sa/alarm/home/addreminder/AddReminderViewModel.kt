@@ -14,9 +14,7 @@ class AddReminderViewModel : ViewModel() {
     private var date : Long =0
     private var time : Long =0
 
-    init {
 
-    }
 
     fun setReminderDate(date :Long){
         this.date =date

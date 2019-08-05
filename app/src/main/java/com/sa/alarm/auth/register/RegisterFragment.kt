@@ -27,6 +27,7 @@ import com.sa.alarm.utils.SharedPrefUtils
 import kotlinx.android.synthetic.main.fragment_register.*
 import java.util.*
 
+
 class RegisterFragment : BaseFragment() {
     companion object {
         private var registerInstance: RegisterFragment? = null
@@ -111,7 +112,7 @@ class RegisterFragment : BaseFragment() {
             tilPassword.error=resources.getString(R.string.error_password_empty)
             return false
         }
-        else if(password.length <= 8){
+        else if(password.length < 8){
             tilPassword.error=resources.getString(R.string.error_password_invalid)
 
             return false
@@ -150,6 +151,7 @@ class RegisterFragment : BaseFragment() {
         callbackManager = CallbackManager.Factory.create();
         registerViewModel = ViewModelProviders.of(this).get(RegisterViewModel::class.java)
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

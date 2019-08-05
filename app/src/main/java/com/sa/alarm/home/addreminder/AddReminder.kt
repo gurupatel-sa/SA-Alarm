@@ -65,7 +65,6 @@ class AddReminder : BaseFragment() {
             newFragment.setTargetFragment(this, REQUEST_CODE_TIME);
             newFragment.show(fragmentManager!!, "TimePicker")
         }
-//        DateUtils.getRelativeTimeSpanString(timeInMillis).toString()
 
         fabSetReminder.setOnClickListener {
             val reminder = etReminer.text.toString()
@@ -79,8 +78,6 @@ class AddReminder : BaseFragment() {
                 addReminderViewModel.addReminder(reminder, type, date, time)
             }
         }
-
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

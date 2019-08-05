@@ -26,6 +26,7 @@ class UserDataSource : PageKeyedDataSource<Query, User>() {
             .limit(PAGE_SIZE)
     }
 
+    //load intital data for pagination
     override fun loadInitial(params: LoadInitialParams<Query>, callback: LoadInitialCallback<Query, User>) {
 
         LogUtils.d(TAG,"loadInitial :")
@@ -55,6 +56,8 @@ class UserDataSource : PageKeyedDataSource<Query, User>() {
                 }
             }
     }
+
+    //load next data when user scrolls
 
     override fun loadAfter(params: LoadParams<Query>, callback: LoadCallback<Query, User>) {
         LogUtils.d(TAG,"loadAfter :")

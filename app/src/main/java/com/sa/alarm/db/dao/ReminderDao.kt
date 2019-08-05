@@ -14,9 +14,9 @@ interface ReminderDao {
     @Insert
     fun insert(data: Reminder)
 
-    @Query("SELECT * FROM reminder WHERE type =1 order by timestamp ASC ")
+    @Query("SELECT * FROM reminder WHERE type =1 order by timestamp DESC ")
     fun getOtherReminders(): List<Reminder>
 
-    @Query("SELECT * FROM reminder where type=0 order by timestamp ASC")
+    @Query("SELECT * FROM reminder where type=0 order by timestamp DESC")
     fun getMyReminders(): List<Reminder>
 }
